@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "binzhome-59143"
-  }
+    "default": "binzhome-59143",
+    "main": "binzhome-59143"
+  },
+  "targets": {},
+  "etags": {}
 }
