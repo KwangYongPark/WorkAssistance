@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>나트랑 자유 여행</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #F1F0E8;  /* light beige */
+            /* background-image: url('https://png.pngtree.com/thumb_back/fh260/background/20220523/pngtree-tropical-beach-summer-resort-image_1389758.jpg'); */ /* 바다 이미지 URL 제거 */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        h1 {
+            text-align: center;
+            margin: 20px 0;
+            color: #005068; /* dark teal */
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        h2 {
+            margin: 20px auto 10px auto;
+            width: 95%;
+            color: #008080; /* teal */
+            border-bottom: 2px solid #008080;
+            padding-bottom: 5px;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 8px;
+        }
+        .section {
+            width: 95%;
+            margin: 20px auto;
+            background-color: rgba(255, 255, 255, 0.7);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            padding: 20px;
+        }
+        .time-box {
+            margin-bottom: 10px;
+            margin-left: 20px;
+        }
+        .info-item {
+            margin-bottom: 10px;
+            display: flex;
+            flex-direction: column;
+        }
+        .info-label {
+            font-weight: bold;
+            color: #008080; /* teal */
+        }
+        ul {
+            list-style-type: disc;
+            margin-left: 20px;
+            padding-left: 0;
+        }
+        li {
+            margin-bottom: 5px;
+        }
+        .hotel-card {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .hotel-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        .hotel-card h3 {
+            color: #008080; /* teal */
+            margin-bottom: 12px;
+        }
+        .hotel-card a {
+            color: #008080; /* teal */
+            text-decoration: none;
+        }
+        .hotel-card a:hover {
+            text-decoration: underline;
+        }
+        .info-box {
+            width: 95%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color:  #ADC4CE; /* light purple */
+            border-radius: 12px;
+            border: 1px solid #B4A7B3; /* muted purple */
+        }
+        .info-box h3{
+            color: #008080; /* teal */
+            margin-bottom: 12px;
+        }
+        .day-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #008080; /* teal */
+            margin-bottom: 15px;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 8px;
+            padding: 5px;
+        }
+        .flight-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: #EEE0C9;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+        }
+        .flight-time {
+            font-size: 1.1em;
+            color: #666;
+            white-space: nowrap;
+        }
+        .airport-name {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #333;
+        }
+        .time-label {
+            font-size: 0.9em;
+            color: #888;
+        }
+        .flight-icon {
+            width: 40px;
+            height: auto;
+            margin: 0 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .flight-icon img {
+            width: 100%;
+            height: auto;
+        }
+        .event-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 20px;
+             background-color: #EEE0C9;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            flex-wrap: wrap;
+        }
+        .event-info > div {
+            margin-right: 20px;
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+            font-size: 1.2em;
+        }
+        .event-info > div:nth-child(1) {
+            flex: 0 0 20%;
+        }
+        .event-info > div:nth-child(2) {
+            flex: 0 0 20%;
+            font-weight: bold;
+            color: #008080; /* teal */
+        }
+        .event-info > div:nth-child(3) {
+            flex: 0 0 40%;
+        }
+        .event-time::before {
+            content: '';
+        }
+        .sub-event-info {
+            margin-top: 10px;
+            margin-left: 0;
+            font-size: 0.9em;
+            color: #555;
+            padding-left: 2em;
+            display: none;
+            flex: 1 0 100%;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .sub-event-info.show {
+            display: block;
+        }
+        .toggle-sub-event {
+            cursor: pointer;
+            color: #008080; /* teal */
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        .event-memo{
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+        .event-open {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+        .sub-event-title {
+            cursor: pointer;
+            margin-left: 0;
+        }
+        .sub-event-body {
+            display: none;
+            margin-top: 10px;
+            flex: 1 0 100%;
+        }
+        .sub-event-body.show {
+            display: block;
+        }
+        .event-info {
+            align-items: flex-start;
+        }
+        .event-info > div:nth-child(1),
+        .event-info > div:nth-child(2),
+        .event-info > div:nth-child(3) {
+            flex: none;
+            margin-bottom: 5px;
+        }
+        .event-info > div:nth-child(1),
+        .event-info > div:nth-child(2),
+        .event-info > div:nth-child(3) {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-right: 0;
+        }
+        .event-info > div {
+            margin-bottom: 10px;
+        }
+        .event-info > div:nth-child(1) {
+            width: 20%;
+        }
+        .event-info > div:nth-child(2) {
+            width: 20%;
+        }
+        .event-info > div:nth-child(3) {
+            width: 40%;
+        }
+        .sub-event-info {
+            margin-left: 0;
+            padding-left: 0;
+            width: 100%;
+        }
+        .sub-event-title::after {
+            content: ' (접기/펼치기)';
+            font-size: 0.8em;
+            color: #888;
+        }
+        .event-info > div {
+            margin-right: 15px;
+        }
+        .repeat-content {
+            display: none;
+            margin-top: 10px;
+        }
+        .repeat-content.show {
+            display: block;
+        }
+    </style>
+    <script>
+        function toggleSubEvent(event) {
+            const subEventBody = event.target.nextElementSibling;
+            const title = event.target;
+
+            if (subEventBody.classList.contains('show')) {
+                subEventBody.classList.remove('show');
+            } else {
+                subEventBody.classList.add('show');
+            }
+        }
+        function toggleRepeat(event) {
+            const repeatContent = event.target.nextElementSibling;
+            const header = event.target;
+
+            if (repeatContent.classList.contains('show')) {
+                repeatContent.classList.remove('show');
+            } else {
+                repeatContent.classList.add('show');
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>나트랑 자유 여행</h1>
+
+    <section class="section">
+        <h2>1일차: 한국 출발 및 나트랑 도착</h2>
+        <div class="day-title">2025.05.22 (목) - 한국/나트랑</div>
+        <div class="flight-info">
+            <div>
+                <div class="time-label"><strong>출발</strong></div>
+                <div class="airport-name"><strong>대구</strong></div>
+                <div class="flight-time"><strong>07:50</strong></div>
+                </div>
+            <div class="flight-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/3234/3234385.png" alt="비행기 아이콘">
+                <div class="flight-time"><strong>비엣젯 VJ871</strong></div>
+                <div class="flight-time"><strong>(4시간 50분)</strong></div> </div>
+            <div>
+                <div class="time-label"><strong>도착</strong></div>
+                <div class="airport-name"><strong>나트랑</strong></div>
+                <div class="flight-time"><strong>10:40</strong></div>
+            </div>
+        </div>
+        <div >
+            <div><strong class="car-label">출발</strong> <strong class="car-name">깜란공항</strong> <strong class="car-time">11:00</strong></div>
+            <div><strong class="car-label">도착</strong> <strong class="car-name">나트랑 시내</strong> <strong class="car-time">12:00</strong></div>
+        </div>
+        <div class="flight-info">
+            <div>
+                <div class="time-label"><strong>출발</strong></div>
+                <div class="airport-name"><strong>인천</strong></div>
+                <div class="flight-time"><strong>06:45</strong></div>
+                </div>
+            <div class="flight-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/3234/3234385.png" alt="비행기 아이콘">
+                <div class="flight-time"><strong>비엣젯 JV835</strong></div>
+                <div class="flight-time"><strong>(4시간 50분)</strong></div> </div>
+            <div>
+                <div class="time-label"><strong>도착</strong></div>
+                <div class="airport-name"><strong>나트랑</strong></div>
+                <div class="flight-time"><strong>09:35</strong></div>
+            </div>
+        </div>
+        <div class="event-info">
+            <div><strong class="event-time">11:00</strong></div>
+            <div><strong class="event-title">시내 이동</strong></div>
+            <div><strong class="event-memo">밴 탑승</strong></div>
+        </div>
+        <div class="event-info">
+            <div><strong class="event-time">12:00</strong></div>
+            <div><strong class="event-title">점심 식사</strong></div>
+            <div><strong class="event-memo">지역 식당</strong></div>
+            <div class="sub-event-info">
+                <strong class="sub-event-title" onclick="toggleSubEvent(event)">🍜 대표 메뉴 및 가격</strong>
+                <div class="sub-event-body">
+                    &nbsp;&nbsp;&nbsp;&nbsp;Bánh Canh Ghẹ Nguyên Con (통게살 국수): 93,000 VND<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;Bánh Canh Ghẹ Gỡ (게살 발라낸 국수): 62,000 VND<br>
+                    &nbsp;&nbsp;이 외에도 다양한 해산물 요리를 제공합니다:<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;Bề Bề Rang Me/Muối (새우볶음): 111,000 VND<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;Càng Ghẹ Rang Me/Muối (게집게 볶음): 99,000 VND<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;Ghẹ Hấp/Phomai/Rang Me/Muối (게찜/치즈구이/볶음): 81,000 ~ 93,000 VND<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;Hàu Nướng (굴구이): 51,000 VND<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;Ngao Hấp/Chua Ngọt (조개찜/새콤달콤 조개): 56,000 VND<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;Tôm Nướng Phomai/Muối Ớt (새우 치즈구이/매운소금구이): 62,000 VND
+                </div>
+            </div>
+        </div>
+        
+    </section>
+
+    <section class="section">
+        <h2>호텔 정보</h2>
+        <div class="info-box">
+            <h3>호텔 체크인 안내</h3>
+            <ul>
+                <li>일반적으로 호텔 체크인은 오후 3시 이후입니다.</li>
+                <li>상이한 호텔이 있을 수 있으니 체크인 시간을 미리 확인해주세요.</li>
+            </ul>
+        </div>
+        <div class="hotel-card">
+            <h3><a href="#">빈펄 리조트 나트랑</a></h3>
+            <p>최고급 시설과 다양한 부대시설을 자랑합니다.</p>
+        </div>
+        <div class="hotel-card">
+            <h3><a href="#">인터컨티넨탈 나트랑</a></h3>
+            <p>시내 중심에 위치하여 편리한 접근성을 제공합니다.</p>
+        </div>
+        <div class="hotel-card">
+            <h3><a href="#">쉐라톤 나트랑 호텔 & 스파</a></h3>
+            <p>아름다운 해변 전망을 감상할 수 있습니다.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>나트랑 여행 안내</h2>
+        <div class="info-box">
+            <h3>나트랑 소개</h3>
+            <p>
+                나트랑은 베트남 최고의 휴양지로, 아름다운 해변, 다양한 해양 액티비티, 저렴한 물가, 그리고 맛있는 음식으로 유명합니다.
+                다양한 볼거리와 즐길 거리가 있어 가족 여행, 커플 여행, 친구들과의 여행 등 모든 형태의 여행에 적합합니다.
+            </p>
+            <h3>주요 관광지</h3>
+            <ul>
+                <li><a href="#">나트랑 해변</a> - 아름다운 백사장과 푸른 바다를 자랑하는 대표적인 해변입니다.</li>
+                <li><a href="#">포나가르 사원</a> - 참파 왕국의 유적지로, 독특한 건축 양식을 감상할 수 있습니다.</li>
+                <li><a href="#">나트랑 야시장</a> - 다양한 먹거리와 기념품을 저렴하게 구입할 수 있는 곳입니다.</li>
+                <li><a href="#">혼똔 섬</a> - 빈펄 리조트가 있는 섬으로, 워터파크, 놀이공원, 골프장 등 다양한 즐길 거리가 있습니다.</li>
+            </ul>
+            <h3>음식 정보</h3>
+            <ul>
+                <li><a href="#">나트랑 쌀국수</a> - 신선한 해산물을 넣은 쌀국수는 나트랑에서 꼭 먹어봐야 할 음식입니다격.</li>
+                <li><a href="#">해산물 요리</a> - 저렴하고 신선한 해산물을 다양한 방식으로 즐길 수 있습니다.</li>
+                <li><a href="#">반쎄오</a> - 베트남식 부침개로, 나트랑에서도 인기 있는 음식입니다.</li>
+            </ul>
+        </div>
+    </section>
+</body>
+</html>
